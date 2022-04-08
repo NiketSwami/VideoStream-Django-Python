@@ -1,0 +1,109 @@
+<style>
+    .root{
+        display: flex;
+        justify-content: center;
+        align-items:baseline;
+        background: #F3F2EE;
+        height: 100vh;
+   }
+    .subdiv{
+
+        width:800px;
+        background: #FFF;
+        padding: 20px;
+        border-radius: 20px;
+
+
+
+    }
+
+    }
+    .gap{
+       margin-bottom: 10px;
+
+    }
+    .btncenter{
+          display: flex;
+          justify-content: center;
+          align-content: center;
+    }
+    .btnsize{
+         width: 200px;
+    }
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+
+    <meta charset="UTF-8">
+    <title>EPISODE LIST</title>
+</head>
+<body>
+<div class="root">
+        <div class="subdiv">
+            <div class="row gap">
+                <div class="col" style="display: flex; justify-content: center;width: 450px; align-items; center;font-size:20px; font-weight:bold; letter-spacing: 3px; margin-bottom: 15px">
+                        LIST EPISODES
+                </div>
+                <div class="buttons" style=" width:245px; justify-content: center">
+                    <a href="/episodesinterface">
+                  <div class="button is-primary is-light">Add new Episodes</div>
+                     </a>
+                </div>
+            </div>
+   <table class="table">
+  <thead>
+    <tr>
+        <th><abbs>Episode ID</abbs></th>
+
+        <th><abbr>Category ID</abbr></th>
+        <th><abbr>Shows ID</abbr></th>
+        <th><abbr>Episode Number</abbr></th>
+        <th><abbr>Description</abbr></th>
+        <th><abbr>Poster</abbr></th>
+        <th><abbr>Trailer</abbr></th>
+        <th><abbr>Video</abbr></th>
+        <th><abbr>Update</abbr></th>
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for row in rows %}
+    <tr>
+        <th>{{ row.0 }}</th>
+        <td>{{ row.8 }}</td>
+        <td>{{ row.2 }}</td>
+        <td>{{ row.3 }}</td>
+        <td>{{ row.4 }}</td>
+        <td><a href="/static/{{ row.5 }}"><img src="/static/{{ row.5 }}" width="25"></a></td>
+        <td><a href="/static/{{ row.6 }}"><img src="/static/{{ row.6 }}" width="25"></a></td>
+        <td><a href="/static/{{ row.7 }}"><img src="/static/{{ row.7 }}" width="25"></a></td>
+      <td>
+          <div>
+
+         <span class="icon is-small is-right" style= "margin-right: 15px">
+             <a href="/episodesbyid?eid={{ row.0 }}"> <i class="fas fa-edit"></i></a>
+         </span>
+         <span class="icon is-small is-right">
+             <a href="/episodesbyid?eid={{ row.0 }}"> <i class="fas fa-trash-alt"></i></a>
+         </span>
+
+          </div>
+      </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+        </div>
+  </div>
+
+
+</body>
+</html>

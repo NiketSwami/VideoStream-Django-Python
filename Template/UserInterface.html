@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="/static/vs.js"></script>
+
+
+<style>
+            .zoom:hover {
+                background-color: #000;
+                transition: transform 1s;
+                transform: scale(1.08);
+            }
+
+               input {
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        /* border-bottom-style: groove; */
+         /* border-bottom-color: #4834d4; */
+        background-color: #130f40;
+        border-bottom: none;
+         font-size: 15px; color:#FFF;
+         /* padding:8px; */
+         height: 30px;
+         width:85%;
+         font-family: arial;
+         letter-spacing: 1px;
+
+      }
+
+      .no-outline:focus {
+        outline: none;
+
+      }
+      .mobileinput{
+        display: flex;
+        flex-direction: row;
+        width:100%;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+      }
+      .inputtext{
+        width:80%;
+        color:#ffffff;
+
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: ridge;
+         border-bottom-color: #4834d4;
+      }
+      .span{
+
+          padding-right:5px;
+
+          font-family: Arial;
+
+          color:#ffffff;
+          letter-spacing: 1px;
+          font-size: 15px;
+          border-right:#ffffff;
+          border-top-style: hidden;
+
+        border-left-style: hidden;
+        border-right-style: ridge;
+         border: right color 5px #ffffff;
+
+      }
+      ::placeholder {
+  color: #a4b0be;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+ color: white;
+}
+
+::-ms-input-placeholder {
+ color: white;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 35px;
+}
+
+td, th {
+  border: 1px solid #130f40;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #130f40;
+}
+ div:focus {
+    background:rgba(95, 125, 155, 0.4);
+}
+
+
+        </style>
+    <title>Video Streaming</title>
+</head>
+<body >
+<div style="background:#000; height: 100%;padding: 5px;">
+
+<div style="background: #000; display:flex; flex-direction: row;align-items: center; ">
+
+    <div style="margin:5px">
+      <img src="/static/disneyindia.png" width="100">
+    </div>
+   <div style="margin-right: 20px;"></div>
+
+
+    {%  for row in rows %}
+
+      <div style="padding:5px;margin-right:20px;font-size: 16px;font-weight: bold; letter-spacing: 1px; color:#f6e58d;" >
+
+        {{ row.1 }}
+
+    </div>
+      {% endfor %}
+
+    <input type="text" id="st" style="width:35%;padding:10px;border:1px solid #fff;border-radius: 3px;" placeholder="Search...">
+
+
+<div style="padding:5px;margin-left:auto;justify-content: right; display:flex; flex-direction:row;">
+
+    <div id="loginname" style=" color:#FFF;font-size: 16px;font-weight: bold; border-color: #FFF; padding:3px;" >{{ user.1 }}</div>
+
+    {% if ses %}
+        <a href="/userlogout" style="background:#4cd137;font-size: 12px; color: #FFF;font-weight: bold;" class = "button modal-button" id="logout">LOGOUT</a>
+    {% else %}
+    <a style="background:#0984e3;font-size: 12px; color: #FFF;font-weight: bold;" class = "button modal-button" data-target = "#subscribe">SUBSCRIBE</a>
+    <a style="background:#4cd137;font-size: 12px; color: #FFF;font-weight: bold;" class = "button modal-button" data-target = "#modal">LOGIN</a>
+    {% endif %}
+
+</div>
+</div>
+
+<!------------Subscribe-------------->
+  <div id="subscribe" class = "modal">
+    <div class="modal-background"></div>
+    <div style="width:850px; height:auto; background: #130f40; " class="modal-content">
+        <div style="font-weight:700; font-size: 28px; color:#FFF;padding: 10px; margin-top: 0px;margin-bottom: 20px;margin-left: 28px; ">Subscribe to get more out of Disney+ Hotstar</div>
+            <div style="display: flex;flex-direction: column;width:100%;justify-content: center;align-items: center;color: #ffffff;">
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;"></div>
+                    <div style="width:15%;">
+                        <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/free-1x.png" >
+                    </div>
+                    <div style="width:15%;">
+                        <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/vip-1x.png" >
+                    </div>
+                    <div style="width:15%;">
+                        <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/premium-1x.png">
+                    </div>
+                </div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Unlimited Live Sports</div>
+                    <div style="width:15%;">
+                        <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div style="width:15%;">
+                       <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Hotstar Specials & Star serials before TV</div>
+                    <div style="width:15%;">
+                      <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div style="margin:3px;  border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Multiplex & new Indian movies</div>
+                    <div style="width:15%;">
+                       <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;justify-content: center;align-items: center;">
+                    <div style="font-size: 14px;width:60%;">Disney+ movies, Hollywood movies & Kids content<br><small style="color:#1f80e0">Dubbed in  ನ್ನಡ   বাংলা   తెలుగు</td></small></div>
+                    <div style="width:15%;">
+                       <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">Only Dubbed</span>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">English + Dubbed</span>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">English shows & Disney+ Originals</div>
+                    <div style="width:15%;">
+                        <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                       <i class="fas fa-check"></i>
+                    </div>
+                    <div style="width:15%;">
+                       <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Ad free entertainment</div>
+                    <div style="width:15%;">
+                        <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                       <i style="color:#7f8c8d;" class="fas fa-times"></i>
+                    </div>
+                    <div style="width:15%;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Screens you can watch on</div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">1</span>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">2</span>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">3</span>
+                    </div>
+                </div>
+                <div style="margin:3px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:2px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div style="font-size: 14px;width:60%;">Video quality</div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">SD</span>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">HD</span>
+                    </div>
+                    <div style="width:15%;">
+                        <span style="font-size: 13px;">4K</span>
+                    </div>
+                </div>
+                <div style="margin:0px; border-bottom: 1px solid #334366;width:90%"></div>
+                <div style="width:90%;padding-bottom:0px;color:#ffffff;display: flex;flex-direction: row;">
+                    <div tabindex="1" style="width:31%;border: 1px solid #334366;margin-top:2px;padding: 10px;border-radius: 5px;background-color: focus #ffffff;">
+                        <div>
+                            <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/vip-1x.png">
+                            <div style="margin-left: 81%;"><i class='fas fa-check-circle' style='font-size:24px'></i></div>
+                        </div>
+                        <div style="display: flex;flex-direction: row;justify-content: flex-start;">
+                            <span id="amount1" style="font-size: 30px;font-weight: bold;">399<small style="font-size: 18px;font-weight: 600;letter-spacing: 1px;">/Year</small></span>
+                        </div>
+                    </div>
+                    <div tabindex="2" style="width:31%;border: 1px solid #334366;margin-top:2px;margin-left:20px;padding: 10px;border-radius: 5px;background-color: focus #ffffff;">
+                        <div>
+                            <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/premium-1x.png">
+                         <div style="margin-left: 81%;"><i class='fas fa-check-circle' style='font-size:24px'></i></div>
+                        </div>
+                        <div style="display: flex;flex-direction: row;justify-content: flex-start;">
+                            <span id="amount2" style="font-size: 30px;font-weight: bold;">1499<small style="font-size: 18px;font-weight: 600;letter-spacing: 1px;">/Year</small></span>
+                        </div>
+                    </div>
+                    <div tabindex="3" style="width:31%;border: 1px solid #334366;margin-top:2px;margin-left:20px;padding: 10px;border-radius: 5px;background-color: focus #ffffff;">
+                        <div>
+                            <img src="https://secure-media.hotstar.com/static/subscription/logo/psp-lite/premium-1x.png">
+                            <div style="margin-left: 81%;"><i class='fas fa-check-circle' style='font-size:24px'></i></div>
+                        </div>
+                        <div style="display: flex;flex-direction: row;justify-content: flex-start;">
+                            <span id="amount3" style="font-size: 30px;font-weight: bold;">299<small style="font-size: 18px;font-weight: 600;letter-spacing: 1px;">/Month</small></span>
+                        </div>
+                    </div>
+                </div>
+                <button  id="m_close4" data-target="#modal" style="font-weight:700; font-size: 18px; color:#FFF;padding: 2px; margin-top: 2px;width:90%; " class="button is-link is-hovered">Continue>></button>
+            </div>
+
+
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+
+
+
+
+<!--------------Login----------->
+    <div class="modal" id="modal">
+  <div class="modal-background"></div>
+  <div style="width: 400px; height: 250px;background:#130f40; " class="modal-content">
+     <div style="font-weight: bold; font-size: 18px; color: #FFF;padding: 10px; margin-top: 20px; margin-left: 50px;"> Login to Continue</div>
+
+       <div style="margin-top: 20px;" class="mobileinput">
+                <div class="inputtext">
+                <span class="span">+91</span>
+                <input type="text" id="mobileno" placeholder="Enter Your Mobile Number" class="no-outline" />
+            </div>
+             </div>
+
+      <div style="padding: 20px;" class="buttons">
+            <button  id="m_close" data-target = "#modalotp"  style="font-weight:700; font-size: 18px; color:#FFF;padding: 2px; margin-top: 20px;margin-left: 35px; width:81%; " class="button is-link is-hovered">Continue</button>
+      </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<!----------otp ------>
+<div id = "modalotp" class = "modal">
+  <div class="modal-background"></div>
+  <div style="width:400px; height:330px; background: #130f40; " class="modal-content">
+      <div style="font-weight:700; font-size: 18px; color:#FFF;margin-top: 20px;margin-left: 35px; ">OTP</div>
+      <h2 style="font-size: larger;color:#ffffff;font-weight: bold;margin-left: 35px;margin-top: 10px;">Enter the 4-digit code sent to</h2>
+      <h3 id="show_mobile" style="font-size: larger;color:#ffffff;font-weight: bold;margin-left: 35px;margin-top: 10px;margin-bottom: 30px;">+91******8009</h3>
+      <div class="mobileinput">
+        <input type="text" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;" class="no-outline" />
+        <input type="text" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;" class="no-outline" />
+        <input type="text" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;" class="no-outline" />
+        <input type="text" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;" class="no-outline" />
+     </div>
+     <a href="#" style="font-size: larger;color:#ffffff;font-weight: bold;margin-left: 35px;margin-top: 10px;">Resend Code</a>
+
+       <button  id="m_close2" data-target="#modaldetail" style="font-weight:700; font-size: 18px; color:#FFF;padding: 2px; margin-top: 20px;margin-left: 35px;  width:81%; " class="button is-link is-hovered">Continue</button>
+
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<!----------user details ------>
+<div id = "modaldetail" class = "modal">
+    <div class="modal-background"></div>
+    <div style="width:400px; height:330px; background: #130f40; " class="modal-content">
+        <div style="font-weight:700; font-size: 18px; color:#FFF;margin-top: 20px;margin-left: 35px; ">Tell us about you</div>
+        <!-- <h2 style="font-size: larger;color:#ffffff;font-weight: bold;margin-left: 35px;margin-top: 10px;">Enter the 4-digit code sent to</h2>
+        <h3 style="font-size: larger;color:#ffffff;font-weight: bold;margin-left: 35px;margin-top: 10px;margin-bottom: 30px;">+91******3085</h2> -->
+            <div>
+                <input type="text" id="username" style="border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;font-weight:700; font-size: 18px; color:#FFF;margin-top: 20px;margin-left: 35px; " placeholder="Your Name" class="no-outline" />
+                <input type="text" id="age" style="border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;font-weight:700; font-size: 18px; color:#FFF;margin-top: 20px;margin-left: 35px; " placeholder="Age" class="no-outline" />
+            </div>
+            <div class="mobileinput">
+                <div class="inputtext">
+
+                <span style="">Gender</span>
+                <input type="radio" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;"  value="Male" id="mgender" name="gender" class="no-outline" />Male
+                <input type="radio" style="margin:3%;width:15%;/* border:1px solid #ffffff; */border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: ridge;border-bottom-color: #4834d4;"  value="Female"  id="fgender" name="gender"  class="no-outline" />Female
+            </div>
+
+
+            </div>
+
+             <button  id="m_close3"  data-target="#subscribe" style="font-weight:700; font-size: 18px; color:#FFF;padding: 2px; margin-top: 20px;margin-left: 35px;  width:81%; " class="button is-link is-hovered" class = "button  modal-button" data-target = "#subscribe">Continue</button>
+
+        <div style="padding: 5px; text-align: center;">
+            <h3 style="color:lawngreen; font-weight:bold;font-size:14px; letter-spacing:1px;" id="msg"></h3>
+        </div>
+
+    </div>
+
+
+
+    <button class="modal-close is-large" aria-label="close"></button>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+<!-- Start Hero Carousel -->
+		<section class="hero is-medium has-carousel" >
+			<div id="carousel-demo" class="hero-carousel" >
+				<div class="item-1" style="width:800px; height:500px;">
+									<img src="/static/Avatar.jpg"  >
+									</div>
+									<div class="item-2" style="width:800px; height:500px;">
+										<img src="/static/1917.jpg"  >
+									</div>
+									<div class="item-3" style="width:800px; height:500px;">
+									<img src="/static/inception.jpg"  >
+									</div>
+									<div class="item-4" style="width:800px; height:500px;"  >
+								   <img src="/static/Tom.jpg"  >
+									</div>
+				                    <div class="item-5" style="width:800px; height:500px;">
+								<img src="/static/Avengers.jpg"  >
+									</div>
+										<div class="item-6" style="width:800px; height:500px;">
+														<img src="/static/Captain.jpg" width="800" >
+														</div>
+
+			</div>
+			<div class="hero-head"></div>
+			<div class="hero-body"></div>
+			<div class="hero-foot"></div>
+		</section>
+		<!-- End Hero Carousel -->
+		<div class="show" id="search" class="hero-carousel" >
+
+            </div>
+
+
+<div style=" padding:5px;color: #FFF;font-weight: bold;font-size: 22px;letter-spacing: 1px">
+    Latest & Trending
+</div>
+
+<section class="hero is-medium has-carousel"  style="height:180px">
+			<div class="show"   id="trending" class="hero-carousel" >
+                {% for trending in trows %}
+     	<div  class="zoom"  style="margin:5px;border-radius: 10px;">
+            <a href="/preview?row={{ trending }}"> <img   src="/static/{{trending.11}}" style="width:150px;border-radius: 10px;" /></a>
+
+        </div>
+
+    {% endfor %}
+</div>
+			<div class="hero-head"></div>
+			<div class="hero-body"></div>
+			<div class="hero-foot"></div>
+		</section>
+
+
+<div style="padding:5px;color: #FFF;font-weight: bold;font-size: 22px;letter-spacing: 1px">
+    Tv Shows & Web Series
+</div>
+<section class="hero is-medium has-carousel" style="height:200px">
+			<div class="show" id="tvshows" class="hero-carousel" >
+                {% for tv in tvrows %}
+     	<div   class="zoom"  style="margin:5px">
+            <a href="/tvpreview?row={{ tv }}"><img  src="/static/{{tv.11}}" style="width:150px;border-radius: 10px;" /></a>
+
+      </div>
+    {% endfor %}
+
+</div>
+		</section>
+</div>
+
+<div style="background-color:#192a56;position: absolute; margin: 0 auto; width:100%;" >
+                <div style="margin:0 auto;width:77%;">
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:45%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;">Contact</h1>
+                        <li style="float: left;padding-right: 20px;"><a href="#"style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;" >Home</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#"style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">About</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#" style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">Contact</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#" style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">Terms & Condition</a></li>
+                        <div style="text-align: left;padding-top: 20px;font-size: 16px;color:#ffffff">
+                            <p style="font-size: 14px;"><i class="fa fa-home" style="font-size:16px"></i> Head Office :- H.C. : 13, Gulabchand Ki Bagichi, Behind Jhawar Estate, Thatipur, Gwalior- 474011 (M.P.)</p>
+                        </div>
+                    </div>
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:20%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;;">Connect with us</h1>
+                        <div style="text-align: left;padding-top: 20px;font-size: 16px;color:#ffffff">
+
+                            <i class="fab fa-facebook-square" style="font-size:36px"></i>
+                            <i class="fab fa-twitter-square" style="font-size:36px"></i>
+                            <i class="fab fa-instagram" style="font-size:36px"></i>
+
+                        </div>
+                    </div>
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:23%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;">Disney+ Hotstar App</h1>
+                        <div style="text-align: left;font-size: 16px;color:#ffffff">
+                            <a href="#"><img style="padding: 5px;" src="/static/appstore.png" ></a>
+                            <a href="#"><img  style="padding: 5px;" src="/static/playstore.png" ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+		<script>
+			bulmaCarousel.attach('#carousel-demo', {
+				slidesToScroll: 1,
+				slidesToShow: 2,
+                autoplay:true,
+                autoplaySpeed:5000,
+                loop:true,
+
+			});
+		</script>
+
+       <script>
+			bulmaCarousel.attach('#trending', {
+				slidesToScroll: 1,
+				slidesToShow: 10,
+                pagination:false
+			});
+		</script>
+     <script>
+			bulmaCarousel.attach('#tvshows', {
+				slidesToScroll: 1,
+				slidesToShow: 10
+			});
+		</script>
+
+ <script>
+    var amt=100
+    $("#amount1").click(function() {amt=399})
+    $("#amount2").click(function() {amt=1499})
+    $("#amount3").click(function() {amt=299})
+
+
+
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+          $("#m_close").click(function() {
+
+            $("html").removeClass("is-clipped");
+           $(".modal").removeClass("is-active");
+
+           $("#show_mobile").html("+91"+($("#mobileno").val().substring(6).padStart(10,"*")))
+
+
+           var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+
+          $("#m_close2").click(function() {
+
+        $("html").removeClass("is-clipped");
+        $(".modal").removeClass("is-active");
+        var target = $(this).data("target");
+        $.getJSON("http://localhost:8000/checkmobilenumber",{mobileno:$('#mobileno').val()},function(data)
+        {
+           if(data)
+           {
+              $("#loginname").html(data[1])
+              $.getJSON("http://localhost:8000/usersession",{mobileno:$('#mobileno').val(),username:data[1]},function(data)
+        {
+                location.href="http://localhost:8000/userview"
+         }
+
+          )
+
+           }
+           else
+           {
+                $("html").addClass("is-clipped");
+                $(target).addClass("is-active");
+
+
+           }
+
+        })
+
+
+
+        });
+
+       $("#m_close3").click(function() {
+
+        $("html").removeClass("is-clipped");
+        $(".modaldetail").removeClass("is-active");
+
+
+         var target = $(this).data("target");
+        $("html").addClass("is-clipped");
+        $(target).addClass("is-active");
+
+          });
+
+
+
+
+
+          $("#m_close4").click(function() {
+
+        $("html").removeClass("is-clipped");
+        $(".modal").removeClass("is-active");
+
+
+       //var target = $(this).data("target");
+       //$("html").addClass("is-clipped");
+        //$(target).addClass("is-active");
+             payment()
+        });
+function payment(){
+
+    var options = {
+	"key": "rzp_test_GQ6XaPC6gMPNwH",
+	"amount": amt*100, // Example: 2000 paise = INR 20
+	"name": "Hotstar",
+	"description": "Payment for subscription",
+	"image": "/static/hotstarlogo.png",// COMPANY LOGO
+	"handler": function (response) {
+		console.log(response);
+
+
+		 var gender=""
+
+        //alert($("#mgender").prop("checked"))
+        //alert($("#fgender").prop("checked"))
+
+
+        if($("#mgender").prop("checked"))
+         { gender="Male"}
+
+        if($("#fgender").prop("checked"))
+         { gender="Female"}
+
+
+        $.getJSON("http://localhost:8000/userdetailssubmit",{mobileno:$('#mobileno').val(),username:$('#username').val(),age:$('#age').val(),gender:gender,status:'activate'},function(data)
+        {
+            $('#msg').html(data)
+
+        })
+
+
+
+
+		 $.getJSON("http://localhost:8000/usersession",{mobileno:$('#mobileno').val(),username:$('#username').val()},function(data)
+        {
+                location.href="http://localhost:8000/userview"
+         })
+
+		// AFTER TRANSACTION IS COMPLETE YOU WILL GET THE RESPONSE HERE.
+	},
+	"prefill": {
+		"name": $('#username').val(), // pass customer name
+
+		"contact": $('#mobileno').val(), //customer phone no.
+	},
+	"notes": {
+		"address": "address" //customer address
+	},
+	"theme": {
+		"color": "#15b8f3" // screen color
+	}
+};
+console.log(options);
+var propay = new Razorpay(options);
+propay.open();
+}
+
+
+
+
+      </script>
+
+</body>
+</html>

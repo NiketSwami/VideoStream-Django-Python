@@ -1,0 +1,115 @@
+<style>
+    .root{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:#f7f1e3;
+    }
+
+    .rowcenter{
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          padding: 20px;
+          height:100vh;
+          width:100vw;
+    }
+
+
+    .image{
+         background-image:url("https://source.unsplash.com/random");
+         background-repeat:no-repeat;
+         background-size: cover;
+         background-position: center;
+         border-radius: 10px;
+         height:500px;
+    }
+
+</style>
+
+
+
+<html>
+<head>
+ <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/paper/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/paper/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="/static/paper/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/static/paper/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/static/paper/assets/demo/demo.css" rel="stylesheet" />
+<title>Admin Login</title>
+</head>
+<body>
+<div class="root">
+    <div class="row rowcenter">
+       <div class="col-md-6 image">
+
+
+
+       </div>
+       <div class="col-md-6">
+           <form action="/checklogin" method="post">{% csrf_token %}
+            <div class="card card-user">
+              <div class="card-header">
+                <h5 class="card-title">Administration Login</h5>
+              </div>
+              <div class="card-body" style="display:flex; flex-direction:column; align-items: center;justify-content: center; height: 430px">
+                  <div class="row">
+
+
+                      <div class="form-group pl-3" style="width:350;">
+                        <label>Administration Id:</label>
+                        <input type="email" name="emailid" class="form-control" placeholder="Email Address" >
+                      </div>
+                  </div>
+
+                  <div class="row">
+
+                      <div class="form-group pl-3" style="width:350;">
+                        <label>Password:</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="update ml-auto mr-auto">
+                      <button type="submit" class="btn btn-primary btn-round">Login</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="update ml-auto mr-auto" style="font-weight: bold;font-size: 16px;letter spacing: 1;">
+                        {{ msg }}
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+           </form>
+
+       </div>
+    </div>
+</div>
+
+<script src="/static/paper/assets/js/core/jquery.min.js"></script>
+  <script src="/static/paper/assets/js/core/popper.min.js"></script>
+  <script src="/static/paper/assets/js/core/bootstrap.min.js"></script>
+  <script src="/static/paper/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="/static/paper/assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="/static/paper/assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="/static/paper/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+  <script src="/static/paper/assets/demo/demo.js"></script>
+</body>
+</html>

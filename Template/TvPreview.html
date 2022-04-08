@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+
+<style>
+            .zoom:hover {
+                background-color: #000;
+                transition: transform 1s;
+                transform: scale(1.08);
+            }
+
+        </style>
+    <title>Tv Preview</title>
+</head>
+<body >
+<div style="background:#000; height: 100%;padding: 5px;">
+
+<div style="background: #000; display:flex; flex-direction: row;align-items: center; ">
+
+<div style="margin:5px">
+      <img src="/static/disneyindia.png" width="100">
+    </div>
+   <div style="margin-right: 20px;"></div>
+
+
+    {%  for row in rows %}
+
+      <div class="zoom" style="padding:5px;margin-right:20px;font-size: 16px;font-weight: bold; letter-spacing: 1px; color:#f6e58d;" >
+
+        {{ row.1 }}
+
+    </div>
+      {% endfor %}
+<div style="padding:5px;margin-left:auto;justify-content: right;  ">
+    <img src="/static/user Icon.png"  width="30"/>
+</div>
+</div>
+
+<div style=" display: flex;padding: 15px;flex-direction:row;">
+
+
+
+ <div style=" display: flex;padding: 15px;flex-direction: column;">
+     <div style="color: #FFF; padding:5px; margin:5px;font-size: 30px;font-weight: bold;letter-spacing: 1px;">
+        <div>{{ row.3 }}:{{ row.2 }}
+     </div>
+     <div style=" color: #FFF; padding:5px; margin:5px;font-size: 14px;font-weight: bold;">
+          Year.{{ row.5 }}
+         <span style="font-size:16px;">Rating. {{ row.6 }} </span> <i class="fas fa-star" style="font-size:16px; color:#f9ca24;"></i>
+     </div>
+     <div style="color:#FFF; padding:5px; margin:5px;font-size: 20px;font-weight: bold;">
+         <div>{{ row.4 }}</div>
+         <div>{{ row.7 }}</div>
+
+     </div>
+         <div style="color:#FFF; padding:5px; margin:5px;font-size: 20px;font-weight: bold;">
+         <div><a href="/static/{{row.13}}" ><i class="fa fa-play"></i>
+         <span style="font-size:22px;padding-left: 10px; " >Watch Episode One</span></a> </div>
+         </div>
+     </div>
+
+
+ </div>
+    <div style="display: flex; margin-left:auto;">
+  <img   src="/static/{{row.11}}" style="width:250px;border-radius: 10px;" />
+</div>
+</div>
+    <div style="padding:5px;color: #FFF;font-weight: bold;font-size: 22px;letter-spacing: 1px">
+    Trailers & Extras
+</div>
+    <div>
+        <video class="zoom" width="320" height="240" controls style=" padding=30px;border-radius: 10px;">
+               <source src="/static/{{row.12}}" type="video/mp4">
+        </video>
+    </div>
+
+<div style="background:#000">
+<section class="hero is-medium has-carousel"  style="height:180px">
+			<div class="show"   id="episodes" class="hero-carousel" >
+                {% for episode in episodes %}
+     	<div  class="zoom"  style="margin:5px;border-radius: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+
+            <a href="/tvpreview?row={{ episode }}"> <img src="/static/{{episode.5}}" style="width:150px;border-radius: 10px;" /></a>
+             <div style="color: #FFF;position: absolute;paddingLeft:2px;paddingRight:2px;font-size: 8px;border-radius: 2px;font-weight: bold;top:5px;left:5px; " >Episode {{ episode.3 }}</div>
+        </div>
+
+    {% endfor %}
+</div>
+
+		</section>
+</div>
+
+
+<div style="padding:5px;color: #FFF;font-weight: bold;font-size: 22px;letter-spacing: 1px">
+    More Like This
+</div>
+
+
+
+
+<div style="background:#000">
+<section class="hero is-medium has-carousel"  style="height:180px">
+			<div class="show"   id="morelikethis" class="hero-carousel" >
+                {% for tv in tvshows %}
+     	<div  class="zoom"  style="margin:5px;border-radius: 10px;">
+            <a href="/tvpreview?row={{ tv }}"> <img   src="/static/{{tv.11}}" style="width:150px;border-radius: 10px;" /></a>
+
+        </div>
+
+    {% endfor %}
+</div>
+			<div class="hero-head"></div>
+			<div class="hero-body"></div>
+			<div class="hero-foot"></div>
+		</section>
+
+</div>
+</div>
+
+<div style="background-color:#192a56;position: absolute; margin: 0 auto; width:100%;" >
+                <div style="margin:0 auto;width:77%;">
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:45%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;">Contact</h1>
+                        <li style="float: left;padding-right: 20px;"><a href="#"style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;" >Home</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#"style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">About</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#" style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">Contact</a></li>
+                        <li style="float: left;padding-right: 20px;"><a href="#" style="font-weight:bold;color:#ffffff;font-size: 15px;text-decoration: none;">Terms & Condition</a></li>
+                        <div style="text-align: left;padding-top: 20px;font-size: 16px;color:#ffffff">
+                            <p style="font-size: 14px;"><i class="fa fa-home" style="font-size:16px"></i> Head Office :- H.C. : 13, Gulabchand Ki Bagichi, Behind Jhawar Estate, Thatipur, Gwalior- 474011 (M.P.)</p>
+                        </div>
+                    </div>
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:20%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;;">Connect with us</h1>
+                        <div style="text-align: left;padding-top: 20px;font-size: 16px;color:#ffffff">
+
+                            <i class="fab fa-facebook-square" style="font-size:36px"></i>
+                            <i class="fab fa-twitter-square" style="font-size:36px"></i>
+                            <i class="fab fa-instagram" style="font-size:36px"></i>
+
+                        </div>
+                    </div>
+                    <div style="padding:10px;margin:10px;list-style-type: none;float: left; width:23%;">
+                        <h1 style="text-align: left;color:#ffffff;border-bottom: 2px solid red;">Disney+ Hotstar App</h1>
+                        <div style="text-align: left;font-size: 16px;color:#ffffff">
+                            <a href="#"><img style="padding: 5px;" src="/static/appstore.png" ></a>
+                            <a href="#"><img  style="padding: 5px;" src="/static/playstore.png" ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+ <script>
+			bulmaCarousel.attach('#morelikethis', {
+				slidesToScroll: 1,
+				slidesToShow: 10,
+                pagination:false
+			});
+		</script>
+   <script>
+			bulmaCarousel.attach('#episodes', {
+				slidesToScroll: 1,
+				slidesToShow: 10,
+                pagination:false
+			});
+		</script>
+</body>
+</html>>
